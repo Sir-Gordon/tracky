@@ -39,13 +39,13 @@
         float:right;
         height:100%;
     }
-    .navigation a{
+    .navigation li{
         height:100px;
         display:table;
         float:left;
         padding: 0px 20px;
     }
-    .navigation a li{
+    .navigation li a{
         display:table-cell;
         vertical-align:middle; 
         height:100%;
@@ -53,6 +53,18 @@
         font-size:16px;
         font-family:"Arimo";
         text-transform: uppercase;
+    }
+    .hover::after{
+        content:'';
+        display:block;
+        width:0;
+        height:2px;
+        background:#0067CE;
+        transition:width .3s;
+    }
+    .hover:hover::after{
+        width:100%;
+        transition:width .3s;
     }
     .search-box{
         position:absolute;
@@ -96,10 +108,12 @@
         width:0px;
         color:white;
     }
-
+    
     ::placeholder{
         color:white;
     }
+    
+
      
 </style>
     
@@ -107,9 +121,9 @@
 <div id = "header">
     <div class = "inner-header">
         <ul class = "navigation">
-            <a><li>Home</li></a>
-            <a><li>Sign Up</li></a>
-            <a><li>Log In</li></a>
+            <li><a href="#" class="hover">Home</a></li>li>
+            <li><a href="#" class="hover">Sign Up</a></li>li>
+            <li><a href="#" class="hover">Log In</a></li>li>
         </ul>
     </div>
 </div>
