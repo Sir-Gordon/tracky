@@ -16,7 +16,7 @@ var URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbo
 
 request({url: URL}, function(err,res,body){
     
-    console.log(body);
+    // console.log(body);
 
 });
 
@@ -25,6 +25,13 @@ app.get("/searchlist", function (req, resp){
     var searchterm = req.query.searchterm;
     console.log(searchterm);
 
-});
+    URL = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords='+ searchterm + '&apikey=' + apikey;
+    console.log(URL);
+
+    request({url: URL}, function(err,res,body){
+    
+        console.log(body);
+
+})});
 
 
