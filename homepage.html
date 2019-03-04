@@ -4,6 +4,7 @@
 <title>TRACKY</title>    
 <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 
 
@@ -116,6 +117,45 @@
 
      
 </style>
+
+
+<script>
+
+function searchlist(){
+
+
+    var URL = "http://localhost:8080/searchlist"
+    var searchterm = $("#searchbox").val();
+
+    n = {     
+        "searchterm": searchterm,
+    };
+
+    $.ajax({      //get request to server
+	 	url: URL,
+	 	type: "get",
+	 	data: n,
+        dataType : "json",
+	 	success: function(msg){    
+            console.log(msg);
+            
+	 	},
+	 	error: function(jgXHR, textStatus, errorThrown){
+	 		alert("Error:" + textStatus + " " + errorThrown);
+	 	}
+	 })};
+
+
+
+
+
+
+
+
+</script>
+
+
+
     
 <body>    
 <div id = "header">
@@ -130,8 +170,8 @@
     
 <br>
 <div class = "search-box">
-    <input class="search-txt" type = "text" name = "" placeholder="Type to search">
-    <a class = "search-btn" href="#">
+    <input class="search-txt" type = "text" name = "" placeholder="Type to search" id="searchbox" >
+    <a class = "search-btn" href="#" onclick="searchlist()">
         <i class="fas fa-search-dollar"></i>
     </a>
 
