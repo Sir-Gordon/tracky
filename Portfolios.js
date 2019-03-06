@@ -34,8 +34,10 @@ app.get("/searchlist", function (req, resp){
         // console.log(body);
     });
 
-    console.log(itemtosend);
+    console.log(itemtosend[0]);
     resp.jsonp(itemtosend);
+    itemtosend.length = 0;
+    
 });
 
 
