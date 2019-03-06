@@ -1,6 +1,7 @@
 var express = require('express'); 
 var request = require('request');
 var mysql = require('mysql');
+var $ = require('jquery')
 
 var app = express();  
 app.use(express.static(".")); 
@@ -29,9 +30,14 @@ app.get("/searchlist", function (req, resp){
     console.log(URL);
 
     request({url: URL}, function(err,res,body){
-    
         console.log(body);
+        
+    })
+    resp.jsonp(body);
+});
 
-})});
+
+
+
 
 
