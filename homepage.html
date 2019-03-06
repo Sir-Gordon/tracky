@@ -111,11 +111,11 @@
 
 
 <script>
-    $document.ready(function){
+    $(document).ready(function){
         $('#searchbox').keyup(function(){
             $('#result').html('');
             var searchterm = $('#searchbox').val(); 
-            var express = new RegExp(searchterm,'i');
+            var express = new RegExp(searchterm,'g'); // 'i' performs case sensitive 'g' is global performance
             URL = "http://localhost:8080/searchlist";
             n = {     
                 "searchterm": searchterm,
