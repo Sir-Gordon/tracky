@@ -115,9 +115,9 @@
 
 <script>
 
-    function searchlist(){
+//    function searchlist(){
         var URL = "http://localhost:8080/searchlist"
-        $(document).read(function(){
+        $(document).ready(function(){
             $('searchbox').keyup(function(){
                 $('#textdiv').html('');
                 var searchterm = $("#searchbox").val();
@@ -145,7 +145,6 @@
                 });
             });
     });
-};
 
     
 
