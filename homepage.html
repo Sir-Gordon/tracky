@@ -117,10 +117,29 @@
             var searchterm = $('#searchbox').val();
             var express = new RegExp(searchterm,'i');
             URL = "http://localhost:8080/searchlist";
-            n:"{}"
-            
+            n = {     
+                "searchterm": searchterm,
+            };
+            $.ajax({      //get request to server
+                type: "GET",
+                url: URL,
+                data: n,
+                dataType : "jsonp",
+                success: function(msg){    
+//                  console.log(msg);
+                    var data = msg;
+                    $.each(data, function(i,value){
+                        if(value.name.search(expression) != -1){
+                            $('#result').append('<li>'+ value.name +'</li>');
+
+                            };
+                        });
+                    },
+                    error: function(jgXHR, textStatus, errorThrown){
+                        alert("Error:" + textStatus + " " + errorThrown);
+                    }
+                });
         });
-    }
 
 </script>
 <body>
