@@ -114,7 +114,7 @@
     $document.ready(function){
         $('#searchbox').keyup(function(){
             $('#result').html('');
-            var searchterm = $('#searchbox').val();
+            var searchterm = $('#searchbox').val(); 
             var express = new RegExp(searchterm,'i');
             URL = "http://localhost:8080/searchlist";
             n = {     
