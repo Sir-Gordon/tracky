@@ -126,7 +126,7 @@
                 data: n,
                 dataType : "jsonp",
                 success: function(msg){    
-//                  console.log(msg);
+                    console.log(msg);
                     var data = msg;
                     $.each(data, function(i,value){
                         if(value.name.search(expression) != -1){
