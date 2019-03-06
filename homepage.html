@@ -10,8 +10,6 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
     </script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style>
     *{
@@ -71,9 +69,10 @@
         width:100%;
         transition:width .3s;
     }
+
     .search-box{
         position:absolute;
-        top:28%;
+        top:50%;
         left:50%;
         transform:translate(-50%,-50%);
         background:#0067CE;
@@ -105,51 +104,23 @@
         width:240px;
         color:white;
     }
-    
     ::placeholder{
         color:white;
     }
-    
-
-     
 </style>
 
 
 <script>
-
-//    function searchlist(){
-        var URL = "http://localhost:8080/searchlist"
-        $(document).ready(function(){
-            $('searchbox').keyup(function(){
-                $("result").html('');
-                var searchterm = $("#searchbox").val();
-                var expression = new RegExp(searchterm,"i");
-                n = {     
-                    "searchterm": searchterm,
-                    };
-                $.ajax({      //get request to server
-                    type: "GET",
-                    url: URL,
-                    data: n,
-                    dataType : "jsonp",
-                    success: function(msg){    
-//                        console.log(msg);
-                        var data = msg;
-                        $.each(data, function(i,value){
-                            if(value.name.search(expression) != -1){
-                                $('#result').append('<li class="list-group-item">'value.name'</li>');
-
-                            };
-                        });
-                    },
-                    error: function(jgXHR, textStatus, errorThrown){
-                        alert("Error:" + textStatus + " " + errorThrown);
-                    }
-                });
-            });
-    });
-
-    
+    $document.ready(function){
+        $('#searchbox').keyup(function(){
+            $('#result').html('');
+            var searchterm = $('#searchbox').val();
+            var express = new RegExp(searchterm,'i');
+            URL = "http://localhost:8080/searchlist";
+            n:"{}"
+            
+        });
+    }
 
 </script>
 <body>
@@ -167,12 +138,12 @@
     <br>
     <div class="search-box">
         <input class="search-txt" type="text" name="" placeholder="Type to search" id="searchbox">
-        <a class="search-btn" href="#" onclick="searchlist()">
+        <a class="search-btn" href="#">
             <i class="fas fa-search-dollar"></i>
         </a>
 
     </div>
-    <ul class="list-group" id="result"> </ul>
+    <div id= "result"></div>
 
 
 
