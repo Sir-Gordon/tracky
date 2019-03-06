@@ -1,7 +1,7 @@
 var express = require('express'); 
 var request = require('request');
 var mysql = require('mysql');
-var $ = require('jquery')
+
 
 var app = express();  
 app.use(express.static(".")); 
