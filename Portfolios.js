@@ -1,7 +1,7 @@
 var express = require('express'); 
 var request = require('request');
 var mysql = require('mysql');
-
+var bodyParser = require("body-parser");
 
 var app = express();  
 app.use(express.static(".")); 
@@ -21,7 +21,7 @@ request({url: URL}, function(err,res,body){
 
 });
 
-var itemtosend = [];
+var msg = []
 app.get("/searchlist", function (req, resp){
     var searchterm = req.query.searchterm;
     console.log(searchterm);
@@ -29,14 +29,12 @@ app.get("/searchlist", function (req, resp){
     URL = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords='+ searchterm + '&apikey=' + apikey;
 
     request({url: URL}, function(err,res,body){
-        
-        itemtosend.push(body);
-        // console.log(body);
+        let json = JSON.parse(body)
+        msg.push(json);
     });
-
-    console.log(itemtosend[0]);
-    resp.jsonp(itemtosend);
-    itemtosend.length = 0;
+    var msg1 = JSON.parse(msg[0]);
+    console.log(msg1);
+    resp.msg1;
     
 });
 
