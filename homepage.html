@@ -129,10 +129,9 @@
                     console.log(msg);
                     var data = msg;
                     $.each(data, function(i,value){
-                        if(value.name.search(expression) != -1){
-                            $('#result').append('<li>'+ value.name +'</li>');
+                        $('#result').append('<li>'+ value.name +'</li>');
 
-                            };
+                    
                         });
                     },
                     error: function(jgXHR, textStatus, errorThrown){
