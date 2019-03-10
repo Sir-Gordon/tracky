@@ -95,11 +95,32 @@ h1{
 
 }
 
-
-
-.list-group-item
-  {
-    overflow:hidden;  
+#result{
+    width:100%;
+    display: none;
+    min-height: 40px;
+    max-height: 330px;
+    overflow: scroll;
+    border-top:1px solid #f4f4f4;
+}
+#result div{
+    padding:20px 10px;
+    font-size:13px;
+    cursor:pointer;
+}
+/*
+    position: absolute;
+    width: 100%;
+    max-width:870px;
+    cursor: pointer;
+    overflow-y: auto;
+    max-height: 400px;
+    box-sizing: border-box;
+    z-index: 1001;
+  }
+*/
+/*
+    overflow:hidden;
     position: relative;
     display: block;
     padding: 10px 15px;
@@ -107,6 +128,7 @@ h1{
     background-color: #fff;
     border: 1px solid #ddd;
   }
-.list-group-item:hover {
+*/
+#result div:hover {
     background-color: #0067CE;
 }
