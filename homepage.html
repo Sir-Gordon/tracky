@@ -36,7 +36,7 @@
 
                     $('#result').html('');
                     for(var i=0; i<msg.bestMatches.length; i++) {
-                        $('#result').append('<li class="list-group-item">'+ msg.bestMatches[i]["1. symbol"] + '  :  '+ msg.bestMatches[i]["2. name"]);
+                        $('#result').append('<li>'+ msg.bestMatches[i]["1. symbol"] + '  :  '+ msg.bestMatches[i]["2. name"]+'</li>');
                         console.log(msg.bestMatches[i]["2. name"]) ;}
                         
                         $('#result').on('click', 'li', function() {
@@ -76,8 +76,8 @@
         <a class="search-btn" href="#" onclick="searchterm()">
             <i class="fas fa-search-dollar"></i>
         </a>
-        <div>
-        <ul id="result" class="list-group"></ul>
+        <div id ="something">
+            <ul id="result"></ul>
         </div>
     </div>
 
