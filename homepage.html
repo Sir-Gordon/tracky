@@ -1,16 +1,18 @@
 <html>
 
 <head>
-<title>TRACKY</title>    
-<!---This is for the title icon--->
-<link rel = "icon" sizes = "32x32" href = "tracky_logo_v3.png">
-<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-
-
-</head>    
+    <title>TRACKY</title>
+    <!---This is for the title icon--->
+    <link rel="icon" sizes="32x32" href="tracky_logo_v3.png">
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 <style>
     *{
         margin:0;
@@ -115,65 +117,66 @@
 
 <script>
 
-function searchlist(){
+//    function searchlist(){
+        var URL = "http://localhost:8080/searchlist"
+        $(document).ready(function(){
+            $('searchbox').keyup(function(){
+                $("result").html('');
+                var searchterm = $("#searchbox").val();
+                var expression = new RegExp(searchterm,"i");
+                n = {     
+                    "searchterm": searchterm,
+                    };
+                $.ajax({      //get request to server
+                    type: "GET",
+                    url: URL,
+                    data: n,
+                    dataType : "jsonp",
+                    success: function(msg){    
+//                        console.log(msg);
+                        var data = msg;
+                        $.each(data, function(i,value){
+                            if(value.name.search(expression) != -1){
+                                $('#result').append('<li class="list-group-item">'value.name'</li>');
 
+                            };
+                        });
+                    },
+                    error: function(jgXHR, textStatus, errorThrown){
+                        alert("Error:" + textStatus + " " + errorThrown);
+                    }
+                });
+            });
+    });
 
-    var URL = "http://localhost:8080/searchlist"
-    var searchterm = $("#searchbox").val();
-
-    n = {     
-        "searchterm": searchterm,
-    };
-
-    $.ajax({      //get request to server
-	 	url: URL,
-	 	type: "get",
-	 	data: n,
-        dataType : "json",
-	 	success: function(msg){    
-            console.log(msg);
-            
-	 	},
-	 	error: function(jgXHR, textStatus, errorThrown){
-	 		alert("Error:" + textStatus + " " + errorThrown);
-	 	}
-	 })};
-
-
-
-
-
-
-
+    
 
 </script>
-
-
-
-    
-<body>    
-<div id = "header">
-    <div class = "inner-header">
-        <ul class = "navigation">
-            <li><a href="homepage.html" class="hover">Home</a></li>
-            <li><a href="Signup.html" class="hover">Sign Up</a></li>
-            <li><a href="login.html" class="hover">Log In</a></li>
-        </ul>
+<body>
+    <div id="header">
+        <div class="inner-header">
+            <ul class="navigation">
+                <li><a href="homepage.html" class="hover">Home</a></li>
+                <li><a href="Signup.html" class="hover">Sign Up</a></li>
+                <li><a href="login.html" class="hover">Log In</a></li>
+                <!---ADD THE LINK TO THE PORTFOLIO PAGE----->
+                <a href="#"><img alt="Tracky Logo" src="tracky_logo_v3.png" width="80" height="80"></a>
+            </ul>
+        </div>
     </div>
-</div>
-    
-<br>
-<div class = "search-box">
-    <input class="search-txt" type = "text" name = "" placeholder="Type to search" id="searchbox" >
-    <a class = "search-btn" href="#" onclick="searchlist()">
-        <i class="fas fa-search-dollar"></i>
-    </a>
+    <br>
+    <div class="search-box">
+        <input class="search-txt" type="text" name="" placeholder="Type to search" id="searchbox">
+        <a class="search-btn" href="#" onclick="searchlist()">
+            <i class="fas fa-search-dollar"></i>
+        </a>
 
-</div>
-<div id=testdiv> </div>
+    </div>
+    <ul class="list-group" id="result"> </ul>
 
-    
-    
-    
+
+
+
 </body>
+
 </html>
