@@ -26,12 +26,17 @@ app.get("/searchlist", function (req, resp){
     console.log(searchterm);
 
     URL = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords='+ searchterm + '&apikey=' + apikey;
+    response = ''
     console.log(URL);
 
     request({url: URL}, function(err,res,body){
+        
+        
+        
     
-        console.log(body);
+    console.log(body);
+})
 
-})});
+});
 
 
