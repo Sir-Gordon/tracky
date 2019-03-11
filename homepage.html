@@ -6,12 +6,10 @@
     <link rel="icon" sizes="32x32" href="tracky_logo_v3.png">
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
-    </script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
 </head>
 <style>
     *{
@@ -117,30 +115,29 @@
 
 <script>
 
-//    function searchlist(){
+    function searchlist(){
         var URL = "http://localhost:8080/searchlist"
-        $(document).ready(function(){
+        $(document).read(function(){
             $('searchbox').keyup(function(){
-                $("result").html('');
+                $('#textdiv').html('');
                 var searchterm = $("#searchbox").val();
                 var expression = new RegExp(searchterm,"i");
                 n = {     
                     "searchterm": searchterm,
                     };
                 $.ajax({      //get request to server
-                    type: "GET",
                     url: URL,
+                    type: "get",
                     data: n,
-                    dataType : "jsonp",
+                    dataType : "json",
                     success: function(msg){    
 //                        console.log(msg);
-                        var data = msg;
-                        $.each(data, function(i,value){
+                        var json = msg;
+                        $.each(json, function(i,item){
                             if(value.name.search(expression) != -1){
-                                $('#result').append('<li class="list-group-item">'value.name'</li>');
-
+                                $('#textdiv').append('<l1 class ="list-group-item link-class"')
                             };
-                        });
+                    });
                     },
                     error: function(jgXHR, textStatus, errorThrown){
                         alert("Error:" + textStatus + " " + errorThrown);
@@ -148,6 +145,7 @@
                 });
             });
     });
+};
 
     
 
@@ -172,7 +170,7 @@
         </a>
 
     </div>
-    <ul class="list-group" id="result"> </ul>
+    <ul class="list-group" id=testdiv> </ul>
 
 
 
