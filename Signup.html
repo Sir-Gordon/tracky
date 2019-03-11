@@ -2,7 +2,10 @@
 
 <head>
 <title>TRACKY</title>    
-<link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
+<!---This is for the title icon--->
+<link rel = "icon" sizes = "32x32" href = "tracky_logo_v3.png">
+<link rel = "icon" sizes = "32x32" href = "tracky_logo_v3.png">
+<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
 </head> 
@@ -10,8 +13,9 @@
     *{
         margin:0;
         padding:0;
+        list-style: none;
+        text-decoration: none;
     }
-    
     body{
         background-color:#303030;
     }
@@ -35,21 +39,34 @@
         float:right;
         height:100%;
     }
-    .navigation a{
+    .navigation li{
         height:100px;
         display:table;
         float:left;
         padding: 0px 20px;
     }
-    .navigation a li{
+    .navigation li a{
         display:table-cell;
         vertical-align:middle; 
         height:100%;
-        color:white;
+        color:#FFFDF7;
         font-size:16px;
-        font-family:"Arimo";
+        font-family:"Rubik";
         text-transform: uppercase;
     }
+    .hover::after{
+        content:'';
+        display:block;
+        width:0;
+        height:2px;
+        background:#0067CE;
+        transition:width .3s;
+    }
+    .hover:hover::after{
+        width:100%;
+        transition:width .3s;
+    }  
+    
 /* Login Box */
     .login-box{
         top:50%;
@@ -60,7 +77,7 @@
         height:420px;
         padding:8px 40px;
         background:#424242;
-        font-family:sans-serif;
+        font-family:"Rubik";
     }
     .login-box h1{
         float:left;
@@ -110,9 +127,11 @@
 <div id = "header">
     <div class = "inner-header">
         <ul class = "navigation">
-            <a><li>Home</li></a>
-            <a><li>Sign Up</li></a>
-            <a><li>Log In</li></a>
+            <li><a href="homepage.html" class="hover">Home</a></li>
+            <li><a href="Signup.html" class="hover">Sign Up</a></li>
+            <li><a href="login.html" class="hover">Log In</a></li>
+            <!---ADD THE LINK TO THE PORTFOLIO PAGE----->
+            <a href="#"><img alt="Tracky Logo" src="tracky_logo_v3.png" width="80" height="80"></a>
         </ul>
     </div>
 </div>
@@ -121,7 +140,10 @@
     <div class ="textbox">
         <i class="fas fa-user"></i>
         <input type="text" placeholder="Enter a Username"> 
-
+    </div>
+    <div class ="textbox">
+        <i class="fas fa-user"></i>
+        <input type="text" placeholder="Full Name"> 
     </div>
     <div class ="textbox">
         <i class="fas fa-lock"></i>
@@ -132,10 +154,6 @@
         <input type="password" placeholder="Confirm Password" >
     </div>
     <button type="button" class ="btn">Sign Up</button>
-
-
-
-
 </div>
 
 </body>

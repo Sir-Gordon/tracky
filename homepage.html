@@ -1,13 +1,18 @@
 <html>
 
 <head>
-<title>TRACKY</title>    
-<link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-
-
-
-</head>    
+    <title>TRACKY</title>
+    <!---This is for the title icon--->
+    <link rel="icon" sizes="32x32" href="tracky_logo_v3.png">
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 <style>
     *{
         margin:0;
@@ -39,20 +44,32 @@
         float:right;
         height:100%;
     }
-    .navigation a{
+    .navigation li{
         height:100px;
         display:table;
         float:left;
         padding: 0px 20px;
     }
-    .navigation a li{
+    .navigation li a{
         display:table-cell;
         vertical-align:middle; 
         height:100%;
-        color:white;
+        color:#FFFDF7;
         font-size:16px;
-        font-family:"Arimo";
+        font-family:"Rubik";
         text-transform: uppercase;
+    }
+    .hover::after{
+        content:'';
+        display:block;
+        width:0;
+        height:2px;
+        background:#0067CE;
+        transition:width .3s;
+    }
+    .hover:hover::after{
+        width:100%;
+        transition:width .3s;
     }
     .search-box{
         position:absolute;
@@ -64,15 +81,8 @@
         border-radius: 40px;
         padding:10px;
     }
-    .search-box:hover > .search-txt{
-        width:240px;
-        padding: 0 6px;
-    }
-    .search-box:hover > .search-btn{
-        background:white;
-    }
     .search-btn{
-        color:#e84118;
+        color:white;
         float:right;
         width:40px;
         height:40px;
@@ -81,7 +91,6 @@
         justify-content: center;
         align-items: center;
         display: flex;
-        transition:0.4s;
         
     }
     .search-txt{
@@ -93,44 +102,81 @@
         font-size:16px;
         transition: 0.4s;
         line-height: 40px;
-        width:0px;
+        width:240px;
         color:white;
     }
-
+    
     ::placeholder{
         color:white;
     }
+    
+
      
 </style>
+
+
+<script>
+
+//    function searchlist(){
+        var URL = "http://localhost:8080/searchlist"
+        $(document).ready(function(){
+            $('searchbox').keyup(function(){
+                $("result").html('');
+                var searchterm = $("#searchbox").val();
+                var expression = new RegExp(searchterm,"i");
+                n = {     
+                    "searchterm": searchterm,
+                    };
+                $.ajax({      //get request to server
+                    type: "GET",
+                    url: URL,
+                    data: n,
+                    dataType : "jsonp",
+                    success: function(msg){    
+//                        console.log(msg);
+                        var data = msg;
+                        $.each(data, function(i,value){
+                            if(value.name.search(expression) != -1){
+                                $('#result').append('<li class="list-group-item">'value.name'</li>');
+
+                            };
+                        });
+                    },
+                    error: function(jgXHR, textStatus, errorThrown){
+                        alert("Error:" + textStatus + " " + errorThrown);
+                    }
+                });
+            });
+    });
+
     
-<body>    
-<div id = "header">
-    <div class = "inner-header">
-        <ul class = "navigation">
-            <a><li>Home</li></a>
-            <a><li>Sign Up</li></a>
-            <a><li>Log In</li></a>
-        </ul>
+
+</script>
+<body>
+    <div id="header">
+        <div class="inner-header">
+            <ul class="navigation">
+                <li><a href="homepage.html" class="hover">Home</a></li>
+                <li><a href="Signup.html" class="hover">Sign Up</a></li>
+                <li><a href="login.html" class="hover">Log In</a></li>
+                <!---ADD THE LINK TO THE PORTFOLIO PAGE----->
+                <a href="#"><img alt="Tracky Logo" src="tracky_logo_v3.png" width="80" height="80"></a>
+            </ul>
+        </div>
     </div>
-</div>
-    
-<br>
-<div class = "search-box">
-    <input class="search-txt" type = "text" name = "" placeholder="Type to search">
-    <a class = "search-btn" href="#">
-        <i class="fas fa-search-dollar"></i>
-    </a>
+    <br>
+    <div class="search-box">
+        <input class="search-txt" type="text" name="" placeholder="Type to search" id="searchbox">
+        <a class="search-btn" href="#" onclick="searchlist()">
+            <i class="fas fa-search-dollar"></i>
+        </a>
+
+    </div>
+    <ul class="list-group" id="result"> </ul>
 
 
 
-    
-    
-    
-    
-</div>
 
-    
-    
-    
 </body>
+
 </html>
