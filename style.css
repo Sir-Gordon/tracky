@@ -63,6 +63,7 @@ h1{
     transform:translate(-50%,-50%);
     background:#0067CE;
     height:30px;
+    border-radius: 40px;
     padding:10px;
 }
 .search-btn{
@@ -95,22 +96,17 @@ h1{
 }
 
 
-#something{
-    background:blue;
-    position:relative;
-    top:90px;
-}
-#something li{
+
+.list-group-item
+  {
     overflow:hidden;  
-    width:100%;
     position: relative;
     display: block;
     padding: 10px 15px;
     margin-bottom: -1px;
-    background-color: green;
+    background-color: #fff;
     border: 1px solid #ddd;
   }
-#something li:hover {
+.list-group-item:hover {
     background-color: #0067CE;
-    cursor: pointer;
 }
