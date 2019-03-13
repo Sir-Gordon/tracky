@@ -34,7 +34,7 @@
                 dataType : "jsonp",
                 success: function(msg){
 
-                    $('#result').html('');
+                    $('#result').html('<br>');
                     for(var i=0; i<msg.bestMatches.length; i++) {
                         $('#result').append('<li class="list-group-item">'+ msg.bestMatches[i]["1. symbol"] + '  :  '+ msg.bestMatches[i]["2. name"]);
                         console.log(msg.bestMatches[i]["2. name"]) ;}
@@ -76,7 +76,8 @@
         <a class="search-btn" href="#" onclick="searchterm()">
             <i class="fas fa-search-dollar"></i>
         </a>
-        <div>
+        <br>
+        <div id=result-div>
         <ul id="result" class="list-group"></ul>
         </div>
     </div>
