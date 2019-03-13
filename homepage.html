@@ -21,11 +21,12 @@
         
         /* Trial to make make the search onclick make the list visible by changing the .list-group display in css change to visible */
                     
-        $(document).ready(function(){
+        /*$(document).ready(function(){
             $("#search-btn").click(function(){
                 $("#list-group").css("display", "visible");
                 });
         });
+        */
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
             var searchterm = $('#searchbox').val(); 

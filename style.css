@@ -96,7 +96,7 @@ h1{
 }
 /*style for the list box that makes it round still buggy*/
 .list-group {
-    display: none;
+    display: visible;
     margin-top: 21px;
     list-style-type: none;
     border-radius: 7px;
