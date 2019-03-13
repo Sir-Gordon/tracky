@@ -18,6 +18,14 @@
     $(document).ready(function(){
     $('#searchbox').keyup(function(event){
       
+        
+        /* Trial to make make the search onclick make the list visible by changing the .list-group display in css change to visible */
+                    
+        $(document).ready(function(){
+            $("#search-btn").click(function(){
+                $("#list-group").css("display", "visible");
+                });
+        });
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
             var searchterm = $('#searchbox').val(); 
@@ -33,7 +41,9 @@
                 data: n,
                 dataType : "jsonp",
                 success: function(msg){
-
+                    
+                    
+                    /* make items in the list get created with an add button to the right of it. Have to have a function that add the info to the portfolio page */ 
                     $('#result').html('<br>');
                     for(var i=0; i<msg.bestMatches.length; i++) {
                         $('#result').append('<li class="list-group-item">'+ msg.bestMatches[i]["1. symbol"] + '  :  '+ msg.bestMatches[i]["2. name"]);
