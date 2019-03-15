@@ -4,7 +4,7 @@ app.use(express.static("."));
 var mysql = require('mysql');
 var bodyParser=require('body-parser');
  
-var connection = require('./config');
+var connection = require('./config/config');
  
 var authenticateController=require('./controllers/authenticate-controller');
 var registerController=require('./controllers/register-controller');
@@ -36,12 +36,12 @@ module.exports = connection;
 
 var Cryptr = require('cryptr');
 var express=require("express");
-var connection = require('./config');
+var connection = require('./config/config');
 // cryptr = new Cryptr('myTotalySecretKey');
  
 module.exports.register=function(req,res){
     var encryptedString = cryptr.encrypt(req.body.password);
-    var users={
+    var users = {
         "name":req.body.name,
         "username":req.body.username,
         "password":encryptedString,
@@ -61,8 +61,6 @@ module.exports.register=function(req,res){
       }
     });
 }
-
-
 
 /* route to handle registration */
 app.post('/api/register',registerController.register);
