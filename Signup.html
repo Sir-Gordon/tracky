@@ -15,26 +15,26 @@
 
 <script>
     function submit(){
-        var name = document.getElementById("name").value;
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
-        var URL = "http://localhost:8080/Signup";
-        $.ajax({  //AJAX request to server
+        var name = document.getElementById("name").value; //user's input 
+        var username = document.getElementById("username").value; //user's input 
+        var pw = document.getElementById("password").value; //user's input 
+        var URL = "http://localhost:8080/Signup"; //link the inputs into URL
+        
+        //AJAX request to server
+        $.ajax({ 
             type:"POST", // send via GET parameters as a JSON object
             url: URL, // the address of the server side data source to be transferred
-            data: {"name": name,
-                   "username": username,
-                   "password": password,
-                  },
+            data: {"n":name,
+                  "username":username,
+                  "pw":pw,}, // JSON object that will be sent to the server
             dataType: "json",
             success: function(msg){
-                document.getElementById("result").innerHTML = msg;
-                    },
-            error:function(){
+				document.getElementById("result").innerHTML = msg; // div will be populated with the returned response that has the correct information
+	 	},
+            error: function(){
                 alert("Error");
-            }
-            
-    });
+	 	}
+	 });
 }
 
 </script>
