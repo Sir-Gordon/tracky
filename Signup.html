@@ -25,13 +25,13 @@
             dataType: "json",
             success: function(msg){
                 document.getElementById("result").innerHTML = msg;
-                    }
-                });
-            }
-        error: function(){
+                    },
+            error:function(){
                 alert("Error");
-	 	}
-    }
+            }
+            
+    });
+}
 
 </script>
 </head> 
@@ -176,7 +176,7 @@
         <input id ="password" type="password" placeholder="Enter a Password" >
     </div>
     
-    <button type="button" class ="btn" onclick="Submit">Sign Up</button>
+    <button type="button" class ="btn" onclick="submit">Sign Up</button>
 </div>
     <div id ="result"></div>
 
