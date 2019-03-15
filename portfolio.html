@@ -2,95 +2,54 @@
     
 <head>
 <title>TRACKY</title>
-<!---This is for the title icon--->
 <link rel = "icon" sizes = "32x32" href = "tracky_logo_v3.png">
 <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+<script>
+    $(document).ready(function(){
+    $('#searchbox').keyup(function(event){
 
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            var searchterm = $('#searchbox').val(); 
+            var URL = "http://localhost:8080/searchlist";
+
+            var expression = new RegExp(searchterm, "i");
+            var n = {     
+                "searchterm": searchterm,
+            };
+            $.ajax({      //get request to server
+                type: "GET",
+                url: URL,
+                data: n,
+                dataType : "jsonp",
+                success: function(msg){
+                    
+                    
+                    /* make items in the list get created with an add button to the right of it. Have to have a function that add the info to the portfolio page */ 
+                    $('#result').html('<br>');
+                    for(var i=0; i<msg.bestMatches.length; i++) {
+                        $('#result').append('<li class="list-group-item">'+ msg.bestMatches[i]["1. symbol"] + '  :  '+ msg.bestMatches[i]["2. name"]);
+                        console.log(msg.bestMatches[i]["2. name"]) ;}
+                        
+                        $('#result').on('click', 'li', function() {
+                            var click_text = $(this).text().split('|');
+                            alert(click_text);
+                            $('#searchterm').val($.trim(click_text[0]));
+                            $("#result").html('');
+                            });
+
+
+                },
+                error: function(jgXHR, textStatus, errorThrown){
+                        alert("Error:" + textStatus + " " + errorThrown);
+                    }
+                });
+        }})});
+</script>
 </head> 
-<style>
-    *{
-        margin:0;
-        padding:0;
-        list-style: none;
-        text-decoration: none;
-    }
-    
-    body{
-        background-color:#303030;
-    }
-    h1{
-        padding-top: 25px;
-        color:white;
-        object-position: absolute;
-    }
-    #header{
-        width:100%;
-        height:80px;
-        display:block;
-        background-color:#212121;
-    }
-    .inner-header{
-        width:1060px;
-        height:100%;
-        display:block;
-        margin:0 auto;
-        background-color:#212121;
-    }
-    .navigation{
-        float:right;
-        height:100%;
-    }
-    .navigation li{
-        height:100px;
-        display:table;
-        float:left;
-        padding: 0px 20px;
-    }
-    .navigation li a{
-        display:table-cell;
-        vertical-align:middle; 
-        height:100%;
-        color:#FFFDF7;
-        font-size:16px;
-        font-family:"Rubik";
-        text-transform: uppercase;
-    }
-    
-    .hover::after{
-        content:'';
-        display:block;
-        width:0;
-        height:2px;
-        background:#0067CE;
-        transition:width .3s;
-    }
-    .hover:hover::after{
-        width:100%;
-        transition:width .3s;
-    }  
-    
-/* Login Box */
-    .login-box{
-        top:60%;
-        left:50%;
-        position: absolute;
-        transform: translate(-50%,-50%);
-        width:900px;
-        height:500px;
-        padding:8px 40px;
-        background:#424242;
-        font-family:sans-serif;
-    }
-    .login-box h1{
-        float:left;
-        font-size: 40px;
-        border-bottom:5px solid #0067CE;
-        margin-bottom: 50px;
-        padding:12px 0;
-        
-    }
-</style>
+
 <body>
 <div id = "header">
     <div class = "inner-header">
@@ -103,8 +62,20 @@
     </div>
 </div>
      
-<div class ="login-box">
-   <table align="center" id="table" border=1 padding=10px> <thead> <tr><th>         </th> <th>Company Name</th> <th>Price</th> <th>No of Shares</th> <th>Holding Value</th> <th>% of Portfolio</th> </tr> </thead> </table>
+<div class="port-display">
+   <table  align="center" border="1px" padding="10px" id="table">
+       <thead>
+           <tr>
+               <th>Count</th>
+               <th>Company Name</th>
+               <th>Price</th>
+               <th>No of Shares</th>
+               <th>Holding Value</th>
+               <th>% of Portfolio</th>
+               <th>Buying Price</th>
+           </tr>
+       </thead>
+    </table>
 </div>
     
 </body>
