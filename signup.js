@@ -23,7 +23,7 @@ con.connect(function (err) {
     }
 });
 
-app.post('signup', function(req, res){
+app.post('/signup', function(req, res){
     var name = req.query.name;
     var username = req.query.username;
     var password = req.query.password;
