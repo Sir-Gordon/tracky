@@ -25,6 +25,7 @@ con.connect(function (err) {
 
 app.post('/signup', function(req, res){
     var name = req.query.name;
+    console.log(name);
     var username = req.query.username;
     var password = req.query.password;
     var mysql  = "INSERT INTO reg(name,username,password) VALUES('" + name + "','" + username + "','" + password +"')";
@@ -33,7 +34,7 @@ app.post('/signup', function(req, res){
             console.log('Error during query processing');
         }
         else{
-            res.send("You you in our system!")
+            res.send("You are in our system!")
         }
     }); 
 });
