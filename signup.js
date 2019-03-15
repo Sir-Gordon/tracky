@@ -3,9 +3,7 @@ var app = express();
 app.use(express.static("."));
 var mysql = require('mysql');
 var bodyParser=require('body-parser');
- 
-var connection = require('config');
- 
+  
  
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
