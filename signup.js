@@ -4,7 +4,7 @@ app.use(express.static("."));
 var mysql = require('mysql');
 var bodyParser=require('body-parser');
  
-var connection = require('./config/config');
+var connection = require('./config');
  
 var authenticateController=require('./controllers/authenticate-controller');
 var registerController=require('./controllers/register-controller');
@@ -36,7 +36,7 @@ module.exports = connection;
 
 var Cryptr = require('cryptr');
 var express=require("express");
-var connection = require('./config/config');
+var connection = require('./config');
 // cryptr = new Cryptr('myTotalySecretKey');
  
 module.exports.register=function(req,res){
