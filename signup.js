@@ -23,7 +23,7 @@ con.connect(function (err) {
     }
 });
 
-app.post('/signup', function(req, res){
+app.get('/signup', function(req, res){
     var name = req.query.name;
     console.log(name);
     var username = req.query.username;
