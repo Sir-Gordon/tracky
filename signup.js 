@@ -5,7 +5,7 @@ var mysql = require('mysql');
 var bodyParser=require('body-parser');
  
 var connection = require('./config');
- 
+
 var authenticateController=require('./controllers/authenticate-controller');
 var registerController=require('./controllers/register-controller');
  
@@ -29,17 +29,18 @@ con.connect(function (err) {
         console.log('Database successfully connected');
     }
 });
+
 /*module.exports is an object that will be returned as the result of a require function call.*/
 
 module.exports = connection; 
 
-
 var Cryptr = require('cryptr');
 var express=require("express");
 var connection = require('./../config');
+
 // cryptr = new Cryptr('myTotalySecretKey');
  
-module.exports.register=function(req,res){
+module.exports.register = function(req,res){
     var encryptedString = cryptr.encrypt(req.body.password);
     var users={
         "name":req.body.name,
@@ -62,14 +63,12 @@ module.exports.register=function(req,res){
     });
 }
 
-
-
 /* route to handle registration */
 app.post('/api/register',registerController.register);
 console.log(authenticateController);
 app.post('/controllers/register-controller', registerController.register);
 
-//
+
 //
 //// adds new students into the student table in the database
 //app.get('/add', function (req, res) {
