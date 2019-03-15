@@ -41,13 +41,25 @@
                         $('#result').append('<li class="list-group-item">'+ msg.bestMatches[i]["1. symbol"] + '  :  '+ msg.bestMatches[i]["2. name"]);
                         console.log(msg.bestMatches[i]["2. name"]) ;}
                         
-                        $('#result').on('click', 'li', function() {
-                            var click_text = $(this).text().split('|');
-                            $('#searchterm').val($.trim(click_text[0]));
-                            $("#result").html('');
-                            });
-
-
+                    $('#result').on('click', 'li', function() {
+                        var click_text = $(this).text().split('|');
+                        $('#searchterm').val($.trim(click_text[0]));
+                        $("#result").html('');
+                        $("#stock").html(click_text);
+                        document.getElementById("form").style.display = "block";
+                        
+                        console.log(click_text);
+                    })
+                            
+                        $(document).mouseup(function (e) {
+                            var container = $("#form");
+                                
+                        if (!container.is(e.target) // if the target of the click isn't the container...
+                            && container.has(e.target).length === 0) // ... nor a descendant of the container
+                            {
+                            container.fadeOut();
+                            }
+                                });
                 },
                 error: function(jgXHR, textStatus, errorThrown){
                         alert("Error:" + textStatus + " " + errorThrown);
@@ -55,8 +67,7 @@
                 });
         }})});
 
-    $(function() {
-  
+    $(function() {  
         // contact form animations
         $('#popup-body').click(function() {
         $('#form').fadeToggle();
@@ -108,13 +119,15 @@
         </div>
     
         <div id="form">
-            <form action="#">
-                <h3>Comapny Name Here</h3>
+            <form action="http://localhost:8080/myaction">
+                <h2 id='stock'>stock here </h2>
                 <br>
-                <h5>Cost of Stock at Purchase</h5>
+                <label>Cost of Stock at Purchase</label>
                 <input class="popup-input" id="pu-boughtprice" type="text" required>
-                <h5>Number of Shares Own</h5>
+
+                <label> Number of Shares Own</label>
                 <input class="popup-input" id="pu-shares" placeholder="Number of Shares" type="text" required>
+
                 <input class="formBtn" type="submit"/>
             </form>
         </div>

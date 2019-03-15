@@ -50,3 +50,7 @@ app.get("/searchlist", function (req, resp){
     });
 });
 
+app.get('./myaction', function (req, resp){
+    console.log(req.query.stock);
+});
+
