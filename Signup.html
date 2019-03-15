@@ -7,6 +7,10 @@
 <link rel = "icon" sizes = "32x32" href = "tracky_logo_v3.png">
 <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+</script>
 
 
 <script>
@@ -14,7 +18,7 @@
         var name = document.getElementById("name").value;
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
-        var URL = "http://localhost:8080/signup";
+        var URL = "http://localhost:8080/Signup";
         $.ajax({  //AJAX request to server
             type:"POST", // send via GET parameters as a JSON object
             url: URL, // the address of the server side data source to be transferred
@@ -175,9 +179,8 @@
         <i class="fas fa-lock"></i>
         <input id ="password" type="password" placeholder="Enter a Password" >
     </div>
-    <button type="button" class ="btn" onclick="submit">Sign Up</button>
-        <div  style="color:azure" id ="result"></div>
-
+    <button type="button" class ="btn" onclick="submit()">Sign Up</button>
+    <div id = "result" style ="color:aqua"></div>
 </div>
 
 </body>

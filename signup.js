@@ -2,12 +2,6 @@ var express = require("express");
 var app = express();
 app.use(express.static("."));
 var mysql = require('mysql');
-var bodyParser=require('body-parser');
-  
- 
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 var con = mysql.createConnection({ //sets up mysql database
     host: 'localhost',
@@ -15,6 +9,7 @@ var con = mysql.createConnection({ //sets up mysql database
     password: 'Drexeldragons2022',
     database: 'reg',
 });
+
 con.connect(function (err) {
     if (err) {
         console.log('Error connecting to database'+err);
@@ -23,7 +18,7 @@ con.connect(function (err) {
     }
 });
 
-app.get('/signup', function(req, res){
+app.post('/Signup', function(req, res){
     var name = req.query.name;
     console.log(name);
     var username = req.query.username;
