@@ -20,28 +20,6 @@ con.connect(function (err) {
 });
 
 
-
-//
-//
-//// adds new students into the student table in the database
-//app.get('/add', function (req, res) {
-//    var id = req.query.id; //req.query contains the URL query parameters, which is the user's input (after the ? in the URL)
-//	var first = req.query.first;
-//	var last = req.query.last;
-//	var dob = req.query.dob;
-//	var major = req.query.major;
-//    var mysql = "INSERT INTO student (studentid, first_name, last_name, dob, major) VALUES ('" + id + "','" + first + "','" + last + "','" + dob + "','" + major + "')";
-//    con.query(mysql, function(err,rows,fields) {
-//	 	if (err){
-//	 		console.log('Error during query processing');
-//	 	}
-//	 	else {
-//	 		res.send("You've been added!");
-//	 	}
-//	 });
-//});
-
-
 app.listen(8080, function () { //listens to the port 8080
     console.log("SERVER IS STARTING");
 });
