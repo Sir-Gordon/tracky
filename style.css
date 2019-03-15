@@ -136,7 +136,7 @@ popup-body body {
   font-size: 11px; 
 }
 #form { 
-  display: none;             /*none*/
+  display: visible;             /*none*/
   border: 6px solid #FBE98E; 
   padding: 2em;
   width: 400px;
