@@ -2,6 +2,9 @@ var express = require("express");
 var app = express();
 app.use(express.static("."));
 var mysql = require('mysql');
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 var con = mysql.createConnection({ //sets up mysql database
     host: 'localhost',
@@ -18,12 +21,12 @@ con.connect(function (err) {
     }
 });
 
-// adds new students into the student table in the database
 app.post('/Signup', function (req, res) {
-    var name = req.query.n; //req.query contains the URL query parameters, which is the user's input (after the ? in the URL)
-	var username = req.query.username;
-	var pw = req.query.pw;
-    var mysql = "INSERT INTO reg (name, username, password) VALUES ('" + name + "','" + username + "','" + pw + "')";
+    var name = req.body.name; 
+	var username = req.body.username;
+	var pw = req.body.pw;
+    console.log(JSON.stringify(name));
+    var mysql = "INSERT INTO users (name, username, password) VALUES ('" + name + "','" + username + "','" + pw + "')";
     con.query(mysql, function(err,rows,fields) {
 	 	if (err){
 	 		console.log('Error during query processing');

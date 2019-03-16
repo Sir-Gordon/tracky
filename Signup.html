@@ -14,7 +14,8 @@
 
 
 <script>
-    function submit(){
+    //Submit form
+    $("#signup").submit(function(event){
         var name = document.getElementById("name").value; //user's input 
         var username = document.getElementById("username").value; //user's input 
         var pw = document.getElementById("password").value; //user's input 
@@ -29,13 +30,13 @@
                   "pw":pw,}, // JSON object that will be sent to the server
             dataType: "json",
             success: function(msg){
-				document.getElementById("result").innerHTML = msg; // div will be populated with the returned response that has the correct information
+				alert(msg); // div will be populated with the returned response that has the correct information
 	 	},
             error: function(){
                 alert("Error");
 	 	}
 	 });
-}
+})
 
 </script>
 </head> 
@@ -166,7 +167,7 @@
 </div>
 <div class ="login-box">
     <h1>Sign Up</h1>
-    
+    <form id = "signup">
     <div class ="textbox">
         <i class="fas fa-user"></i>
         <input id ="name" type="text" placeholder="Full Name"> 
@@ -179,7 +180,9 @@
         <i class="fas fa-lock"></i>
         <input id ="password" type="password" placeholder="Enter a Password" >
     </div>
-    <button type="button" class ="btn" onclick="submit()">Sign Up</button>
+    </form>
+    <button type="submit" class ="btn">Sign Up</button>
+    
     <div id = "result" style ="color:aqua"></div>
 </div>
 
