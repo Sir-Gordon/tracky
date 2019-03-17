@@ -3,9 +3,10 @@ var app = express();
 app.use(express.static("."));
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: false }));
+var urlencodedParser = (bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Connect to MYSQL
 var con = mysql.createConnection({ //sets up mysql database
     host: 'localhost',
     user: 'root',
@@ -13,6 +14,7 @@ var con = mysql.createConnection({ //sets up mysql database
     database: 'reg',
 });
 
+// Checks for connection
 con.connect(function (err) {
     if (err) {
         console.log('Error connecting to database'+err);
@@ -20,21 +22,22 @@ con.connect(function (err) {
         console.log('Database successfully connected');
     }
 });
-
-app.post('/Signup', function (req, res) {
-    var name = req.body.name; 
-	var username = req.body.username;
-	var pw = req.body.pw;
-    console.log(JSON.stringify(name));
-    var mysql = "INSERT INTO users (name, username, password) VALUES ('" + name + "','" + username + "','" + pw + "')";
-    con.query(mysql, function(err,rows,fields) {
-	 	if (err){
-	 		console.log('Error during query processing');
-	 	}
-	 	else {
-	 		res.send("You've been added!");
-	 	}
-	 });
+// urlencodedParser will pass the user's data, which can then be accessed by the req
+app.post('/Signup', urlencodedParser, function (req, res) {
+    console.log(req.body);
+//    var name = req.body.name; 
+//	var username = req.body.username;
+//	var pw = req.body.pw;
+//    console.log(JSON.stringify(name));
+//    var mysql = "INSERT INTO users (name, username, password) VALUES ('" + name + "','" + username + "','" + pw + "')";
+//    con.query(mysql, function(err,rows,fields) {
+//	 	if (err){
+//	 		console.log('Error during query processing');
+//	 	}
+//	 	else {
+//	 		res.send("You've been added!");
+//	 	}
+//	 });
 });
 
 

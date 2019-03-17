@@ -1,31 +1,46 @@
 <html>
 
 <head>
-<title>TRACKY</title>    
-<!---This is for the title icon--->
-<link rel = "icon" sizes = "32x32" href = "tracky_logo_v3.png">
-<link rel = "icon" sizes = "32x32" href = "tracky_logo_v3.png">
-<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
-</script>
+    <title>TRACKY</title>
+    <!---This is for the title icon--->
+    <link rel="icon" sizes="32x32" href="tracky_logo_v3.png">
+    <link rel="icon" sizes="32x32" href="tracky_logo_v3.png">
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
 
 
 <script>
-    //Submit form
-    $("#signup").submit(function(event){
-        var name = document.getElementById("name").value; //user's input 
-        var username = document.getElementById("username").value; //user's input 
-        var pw = document.getElementById("password").value; //user's input 
-        var URL = "http://localhost:8080/Signup"; //link the inputs into URL
-        
+$(document).ready(function(){
+    var form = $("search_form");
+    form.submit(function(event){ // Whenever submit btn is clicked, jquery will process the function.
+        var name = $("#name").val(); 
+        var username = $("#username").val(); 
+        var pw = $("#pw").val(); 
+        // checks to see the fields are not empty
+        if(name == "" || username == "" || pw == "" ){
+            alert("The field must be populated"!);
+        }
+        else{
+              submission();    
+        }
+    })
+})
+    
+    function submission(){
+        var name = $("#name").val(); 
+        var username = $("#username").val(); 
+        var pw = $("#pw").val();
+        var URL = "http://localhost:8080/Signup"; 
+
         //AJAX request to server
         $.ajax({ 
             type:"POST", // send via GET parameters as a JSON object
             url: URL, // the address of the server side data source to be transferred
-            data: {"n":name,
+            data: {"name":name,
                   "username":username,
                   "pw":pw,}, // JSON object that will be sent to the server
             dataType: "json",
@@ -35,11 +50,11 @@
             error: function(){
                 alert("Error");
 	 	}
-	 });
-})
+        }
+
 
 </script>
-</head> 
+</head>
 <style>
     *{
         margin:0;
@@ -154,37 +169,39 @@
     }
     
 </style>
- <body>
-<div id = "header">
-    <div class = "inner-header">
-        <ul class = "navigation">
-            <li><a href="homepage.html" class="hover">Home</a></li>
-            <li><a href="Signup.html" class="hover">Sign Up</a></li>
-            <li><a href="login.html" class="hover">Log In</a></li>
-            <a href="portfolio.html"><img alt="Tracky Logo" src="tracky_logo_v3.png" width="80" height="80"></a>
-        </ul>
+
+<body>
+    <div id="header">
+        <div class="inner-header">
+            <ul class="navigation">
+                <li><a href="homepage.html" class="hover">Home</a></li>
+                <li><a href="Signup.html" class="hover">Sign Up</a></li>
+                <li><a href="login.html" class="hover">Log In</a></li>
+                <a href="portfolio.html"><img alt="Tracky Logo" src="tracky_logo_v3.png" width="80" height="80"></a>
+            </ul>
+        </div>
     </div>
-</div>
-<div class ="login-box">
-    <h1>Sign Up</h1>
-    <form id = "signup">
-    <div class ="textbox">
-        <i class="fas fa-user"></i>
-        <input id ="name" type="text" placeholder="Full Name"> 
+    <div class="login-box">
+        <h1>Sign Up</h1>
+        <form id="signup_form">
+            <div class="textbox">
+                <i class="fas fa-user"></i>
+                <input id="name" type="text" placeholder="Full Name">
+            </div>
+            <div class="textbox">
+                <i class="fas fa-user"></i>
+                <input id="username" type="text" placeholder="Enter a Username">
+            </div>
+            <div class="textbox">
+                <i class="fas fa-lock"></i>
+                <input id="pw" type="password" placeholder="Enter a Password">
+            </div>
+        </form>
+        <button type="submit" class="btn">Sign Up</button>
+
+        <div id="result" style="color:aqua"></div>
     </div>
-    <div class ="textbox">
-        <i class="fas fa-user"></i>
-        <input id ="username" type="text" placeholder="Enter a Username"> 
-    </div>
-    <div class ="textbox">
-        <i class="fas fa-lock"></i>
-        <input id ="password" type="password" placeholder="Enter a Password" >
-    </div>
-    </form>
-    <button type="submit" class ="btn">Sign Up</button>
-    
-    <div id = "result" style ="color:aqua"></div>
-</div>
 
 </body>
-</html> 
+
+</html>
