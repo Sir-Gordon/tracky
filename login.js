@@ -1,10 +1,17 @@
 var express = require("express");
 var app = express();
+var session = require('express-session');
 app.use(express.static("."));
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json()); // Body parser use JSON data
+
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 
 // Connect to MYSQL
 var con = mysql.createConnection({ //sets up mysql database
