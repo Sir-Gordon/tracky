@@ -36,7 +36,7 @@ app.post('/login', function (req, res) {
         }
         else {
            return res.redirect("http://localhost:8080/homepage");
-           console.log(Redirecting..)
+           console.log("Redirecting..")
 
         }
     });
