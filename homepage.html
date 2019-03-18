@@ -46,6 +46,7 @@
                         $('#searchterm').val($.trim(click_text[0]));
                         $("#result").html('');
                         $("#stock").html(click_text);
+                        $("#stockinput").val(click_text);
                         document.getElementById("form").style.display = "block";
                         
                         console.log(click_text);
@@ -119,15 +120,15 @@
         </div>
     
         <div id="form">
-            <form action="http://localhost:8080/myaction">
+            <form action="http://localhost:8080/myaction" method="GET">
                 <h2 id='stock'>stock here </h2>
                 <br>
-                <label>Cost of Stock at Purchase</label>
-                <input class="popup-input" id="pu-boughtprice" type="text" required>
+                <label for="cost">Cost of Stock at Purchase</label>
+                <input name= 'cost' class="popup-input" id="pu-boughtprice" type="float" required>
 
-                <label> Number of Shares Own</label>
-                <input class="popup-input" id="pu-shares" placeholder="Number of Shares" type="text" required>
-
+                <label for="shares"> Number of Shares Own</label>
+                <input name='shares' class="popup-input" id="pu-shares" placeholder="Number of Shares" type="number" required>
+                <input name= 'stock'type='hidden' id=stockinput>
                 <input class="formBtn" type="submit"/>
             </form>
         </div>

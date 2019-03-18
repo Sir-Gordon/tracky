@@ -6,47 +6,61 @@
 <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+</script>
+
 <script>
-    $(document).ready(function(){
-    $('#searchbox').keyup(function(event){
 
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if(keycode == '13'){
-            var searchterm = $('#searchbox').val(); 
-            var URL = "http://localhost:8080/searchlist";
+function getprofile(){
+    Url= 'http://localhost:8080/getprofile'
+    $.ajax({
+        url: Url,
+        type: 'GET',
+        dataType : "jsonp",
+        success: function(msg) {
+            document.getElementById("empty").innerHTML ='<table  align="center" id="mytable"><thead><tr><th></th><th>Company</th><th>Symbol</th><th>Price</th><th>No. of Shares</th><th>Holding Value</th><th>% of Portfolio</th><th>Purchase Price</th><th>Gain/Lost</th></tr></thead></table>'
+            console.log(msg);
+            table =''
+            totalprice = 0;
+            $.each(msg, function(i,item){
+                var holdvalue = parseFloat(item.Price) * parseInt(item.Shares);
+                console.log(parseFloat(item.Price));
+                totalprice += holdvalue;
+            });
+            console.log(totalprice);
+            $.each(msg, function(i,item){
+                var stock = item.Symbol;
+                var holdvalue = parseFloat(item.Price * item.Shares) ;
+                var percent = parseFloat(holdvalue) / totalprice * 100;
+                var netgain = holdvalue - (parseFloat(item.PurchasePrice) * parseFloat(item.Shares));
+                table += '<tr><td><img src="'+ item.logo +'" height="20" width="20"</td><td>' + item.Company +'</td><td>' + item.Symbol +'</td><td>$' +item.Price+'</td><td>' + item.Shares + '</td><td>$' + holdvalue.toFixed(2) +'</td><td>' +percent.toFixed(2)+'%</td><td>$' + item.PurchasePrice + '</td><td>' + netgain.toFixed(2) + '</td>'
+            })
+            
 
-            var expression = new RegExp(searchterm, "i");
-            var n = {     
-                "searchterm": searchterm,
-            };
-            $.ajax({      //get request to server
-                type: "GET",
-                url: URL,
-                data: n,
-                dataType : "jsonp",
-                success: function(msg){
-                    
-                    
-                    /* make items in the list get created with an add button to the right of it. Have to have a function that add the info to the portfolio page */ 
-                    $('#result').html('<br>');
-                    for(var i=0; i<msg.bestMatches.length; i++) {
-                        $('#result').append('<li class="list-group-item">'+ msg.bestMatches[i]["1. symbol"] + '  :  '+ msg.bestMatches[i]["2. name"]);
-                        console.log(msg.bestMatches[i]["2. name"]) ;}
-                        
-                        $('#result').on('click', 'li', function() {
-                            var click_text = $(this).text().split('|');
-                            alert(click_text);
-                            $('#searchterm').val($.trim(click_text[0]));
-                            $("#result").html('');
-                            });
+            $('#mytable').append(table);
+        
+    }
+});
+}
 
 
-                },
-                error: function(jgXHR, textStatus, errorThrown){
-                        alert("Error:" + textStatus + " " + errorThrown);
-                    }
-                });
-        }})});
+function getprice(stock, callback){
+    URL2 = 'https://api.iextrading.com/1.0/stock/'+ stock+'/batch?types=quote'
+    price= []
+    $.ajax({
+        url: URL2,
+        type: 'GET',
+        dataType : "jsonp",
+    success: function(msg) {
+        lastestprice = msg.quote.latestPrice;
+        price.push(lastestprice)
+    }
+    });
+    callback();
+}
+
 </script>
 </head> 
 
@@ -61,22 +75,10 @@
         </ul>
     </div>
 </div>
-     
-<div class="port-display">
-   <table  align="center" border="1px" padding="10px" id="table">
-       <thead>
-           <tr>
-               <th>Count</th>
-               <th>Company Name</th>
-               <th>Price</th>
-               <th>No of Shares</th>
-               <th>Holding Value</th>
-               <th>% of Portfolio</th>
-               <th>Buying Price</th>
-           </tr>
-       </thead>
-    </table>
+<input type="button" onclick="getprofile()" value="Get profile">
+<div class="port-display" id = 'empty'>
 </div>
-    
+
+
 </body>
 </html>

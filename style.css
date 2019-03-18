@@ -172,3 +172,21 @@ textarea {
   border: none;
   height: 30px;
 }
+
+      /*css for the table as jQuery mobile handle the others */
+      table { 
+        width: 100%; 
+        border-collapse: collapse; 
+        color: #fff;
+      }
+
+      th { 
+        background: #333; 
+        color: white; 
+        font-weight: bold; 
+      }
+      td, th { 
+        padding: 6px; 
+        border: 1px solid #ccc; 
+        text-align: center; 
+      }
