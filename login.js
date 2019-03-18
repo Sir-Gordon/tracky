@@ -1,11 +1,17 @@
 var express = require("express");
 var app = express();
+var session = require('express-session');
 app.use(express.static("."));
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json()); // Body parser use JSON data
 
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 
 // Connect to MYSQL
 var con = mysql.createConnection({ //sets up mysql database
@@ -31,14 +37,29 @@ app.post('/Signup', function (req, res) {
     var password = req.body.password;
     var mysql="SELECT username, password FROM users WHERE username='"+username+"' AND password = '"+password+"'";
     con.query(mysql, function(err,rows,fields) {
-        if (err){
-            console.log('Error during query processing' + err);
+        if(rows.length !=0){
+            res.send("Your're logged in!");
+            res.redirect("/homepage");
         }
-        else {
-            res.send("Your registration has been complete!");
+        else{
+            res.send("you suck!")
         }
-    });
+
+//    if (username && password){
+//        con.query(mysql, function(err,rows,fields) {
+//            if (rows.length >0){
+//                rows.session.loggedin = true;
+//                rows.session.username = username;
+//                response.redirect('/homepage');
+//                console.log('Error during query processing' + err);
+//            }
+//            else {
+//                res.send("You suck");
+//            }
+//        });
+    })
 })
+
 app.listen(8080, function () { //listens to the port 8080
     console.log("SERVER IS STARTING");
 });
