@@ -120,6 +120,17 @@ h1{
     background:#424242;
     font-family:sans-serif;
     }
+.getprofile {
+    position:fixed;
+    top:20%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:#0067CE;
+    height:35px;
+    width: 80px;
+    border-radius: 10px;
+    color:antiquewhite;
+}
 
 
 /*Form*/
