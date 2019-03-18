@@ -24,7 +24,10 @@ con.connect(function (err) {
     }
 });
 
-// urlencodedParser will pass the user's data, which can then be accessed by the req
+app.get("/homepage",function(req,res){
+	res.sendFile(path.join(__dirname + '/homepage.html'));   
+})
+
 app.post('/login', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
@@ -34,7 +37,7 @@ app.post('/login', function (req, res) {
             console.log('Error during query processing' + err);
         }
         else {
-            res.send("You are logged in!")
+            return res.redirect("/homepage")
         }
     });
 })
