@@ -5,6 +5,8 @@ var mysql = require('mysql');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json()); // Body parser use JSON data
+var path = require("path");
+
 
 
 // Connect to MYSQL
@@ -24,10 +26,6 @@ con.connect(function (err) {
     }
 });
 
-app.get("/homepage",function(req,res){
-	res.sendFile(path.join(__dirname + '/homepage.html'));   
-})
-
 app.post('/login', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
@@ -37,9 +35,16 @@ app.post('/login', function (req, res) {
             console.log('Error during query processing' + err);
         }
         else {
-            return res.redirect("/homepage")
+           return res.redirect("http://localhost:8080/homepage");
+
         }
     });
+})
+
+app.get("/homepage",function(req,res){
+    res.sendFile(path.join(__dirname + '/homepage.html')); 
+
+    
 })
 
 app.listen(8080, function () { //listens to the port 8080
