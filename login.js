@@ -25,20 +25,20 @@ con.connect(function (err) {
 });
 
 // urlencodedParser will pass the user's data, which can then be accessed by the req
-app.post('/Signup', function (req, res) {
-    console.log(JSON.stringify(req.body, 2));
+app.post('/login', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
-    var mysql="SELECT username, password FROM users WHERE username='"+username+"' AND password = '"+password+"'";
+    var mysql="SELECT username,password FROM users WHERE username='"+username+"' AND password = '"+password+"'";
     con.query(mysql, function(err,rows,fields) {
         if (err){
             console.log('Error during query processing' + err);
         }
         else {
-            res.send("Your registration has been complete!");
+            res.send("You are logged in!")
         }
     });
 })
+
 app.listen(8080, function () { //listens to the port 8080
     console.log("SERVER IS STARTING");
 });

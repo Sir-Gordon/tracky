@@ -36,6 +36,8 @@ $(document).ready(function() {
             data: {"username":username,
                   "password":password}, // JSON object that will be sent to the server
             dataType: "html",
+            processData: false,
+            contentType: false,
             success: function(msg){
                 alert(msg);
             },
