@@ -17,7 +17,7 @@ $(document).ready(function() {
 //    $("#signup_form").submit(function(event){
 
     $("#submit").click(function(event){
-=       var username = $("#username").val();
+        var username = $("#username").val();
         var password = $("#password").val();
         if (username == "" || password ==""){
             alert("All the fields must be populated");
@@ -34,7 +34,7 @@ $(document).ready(function() {
             type:"POST", // send via GET parameters as a JSON object
             url: URL, // the address of the server side data source to be transferred
             data: {"username":username,
-                  "pw":pw}, // JSON object that will be sent to the server
+                  "password":password}, // JSON object that will be sent to the server
             dataType: "html",
             success: function(msg){
                 alert(msg);
