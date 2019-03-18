@@ -29,13 +29,14 @@ con.connect(function (err) {
 app.post('/login', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
-    var mysql="SELECT username,password FROM users WHERE username='"+username+"' AND password = '"+password+"'";
-    con.query(mysql, function(err,rows,fields) {
+    //var mysql="SELECT username,password FROM users WHERE username='"+username+"' AND password = '"+password+"'";
+    con.query('SELECT * FROM users WHERE username = ? AND password = ?',[username,password], function(err,results,fields) {
         if (err){
             console.log('Error during query processing' + err);
         }
         else {
            return res.redirect("http://localhost:8080/homepage");
+           console.log(Redirecting..)
 
         }
     });
