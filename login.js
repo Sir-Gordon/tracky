@@ -5,6 +5,9 @@ var mysql = require('mysql');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json()); // Body parser use JSON data
+var path = require("path");
+
+
 
 // Connect to MYSQL
 var con = mysql.createConnection({ //sets up mysql database
@@ -23,21 +26,25 @@ con.connect(function (err) {
     }
 });
 
-// urlencodedParser will pass the user's data, which can then be accessed by the req
-app.post('/Signup', function (req, res) {
-    console.log(JSON.stringify(req.body, 2));
-    var name = req.body.name;
+app.post('/login', function (req, res) {
     var username = req.body.username;
-    var pw = req.body.pw;
-    var mysql = "INSERT INTO users (name, username, password) VALUES ('" + name + "','" + username + "','" + pw + "')";
+    var password = req.body.password;
+    var mysql="SELECT username,password FROM users WHERE username='"+username+"' AND password = '"+password+"'";
     con.query(mysql, function(err,rows,fields) {
         if (err){
             console.log('Error during query processing' + err);
         }
         else {
-            res.send("Your registration has been complete!");
+           return res.redirect("http://localhost:8080/homepage");
+
         }
     });
+})
+
+app.get("/homepage",function(req,res){
+    res.sendFile(path.join(__dirname + '/homepage.html')); 
+
+    
 })
 
 app.listen(8080, function () { //listens to the port 8080
