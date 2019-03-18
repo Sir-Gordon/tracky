@@ -31,9 +31,14 @@ app.post('/Signup', function (req, res) {
     var password = req.body.password;
     var mysql="SELECT username, password FROM users WHERE username='"+username+"' AND password = '"+password+"'";
     con.query(mysql, function(err,rows,fields) {
-
+        if (err){
+            console.log('Error during query processing' + err);
+        }
+        else {
+            res.send("Your registration has been complete!");
+        }
+    });
 })
-
 app.listen(8080, function () { //listens to the port 8080
     console.log("SERVER IS STARTING");
 });
